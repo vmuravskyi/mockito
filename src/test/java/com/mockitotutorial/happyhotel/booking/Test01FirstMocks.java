@@ -11,18 +11,18 @@ import org.junit.jupiter.api.Test;
 class Test01FirstMocks {
 
 	private BookingService bookingService;
-	private PaymentService paymentService;
-	private RoomService roomService;
-	private BookingDAO bookingDAO;
-	private MailSender mailSender;
+	private PaymentService paymentServiceMock;
+	private RoomService roomServiceMock;
+	private BookingDAO bookingDAOMock;
+	private MailSender mailSenderMock;
 
 	@BeforeEach
 	void setup() {
-		this.paymentService = mock(PaymentService.class);
-		this.roomService = mock(RoomService.class);
-		this.bookingDAO = mock(BookingDAO.class);
-		this.mailSender = mock(MailSender.class);
-		this.bookingService = new BookingService(paymentService, roomService, bookingDAO, mailSender);
+		this.paymentServiceMock = mock(PaymentService.class);
+		this.roomServiceMock = mock(RoomService.class);
+		this.bookingDAOMock = mock(BookingDAO.class);
+		this.mailSenderMock = mock(MailSender.class);
+		this.bookingService = new BookingService(paymentServiceMock, roomServiceMock, bookingDAOMock, mailSenderMock);
 	}
 
 	@Test
@@ -31,8 +31,10 @@ class Test01FirstMocks {
 		BookingRequest bookingRequest = new BookingRequest(
 			"1", LocalDate.of(2020, 1, 1), LocalDate.of(2020, 1, 5), 2, false);
 		double expected = 4 * 2 * 50.0;
+
 		// when
 		double actual = bookingService.calculatePrice(bookingRequest);
+
 		// then
 		assertEquals(expected, actual);
 	}

@@ -14,7 +14,7 @@ public class BookingService {
 	public int getAvailablePlaceCount() {
 		return roomService.getAvailableRooms()
 				.stream()
-				.map(room -> room.getCapacity())
+				.map(Room::getCapacity)
 				.reduce(0, Integer::sum);
 	}
 	
